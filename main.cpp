@@ -3,18 +3,6 @@
 #include <string>
 #include <CLI/CLI.hpp>
 
-std::string print_bool(bool val)
-{
-	if (val == 1)
-	{
-		return "true";
-	}
-	else
-	{
-		return "false";
-	}
-}
-
 void grep(std::string pattern, std::string data)
 {
 	std::stringstream ss(data);
