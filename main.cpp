@@ -1,7 +1,6 @@
 #include <iostream>
 #include <regex>
 #include <string>
-#include <CLI/CLI.hpp>
 
 void grep(std::string pattern, std::string data)
 {
@@ -19,19 +18,26 @@ void grep(std::string pattern, std::string data)
 	}
 }
 
+void show_help(char *argv[])
+{
+	std::cout << "usage: " << argv[0] << " [pattern]\n";
+}
+
 int main(int argc, char *argv[])
 {
+
+	if (argc == 1 or argc > 2)
+	{
+		show_help(argv);
+		return -1;
+	}
+
 	// First we initialise the data
 	std::string pattern;
     std::string data((std::istreambuf_iterator<char>(std::cin)),
                       std::istreambuf_iterator<char>());
-
-	// Next we create the CLI11 app
-	CLI::App app  { "Grep clone." };
-	app.add_option("pattern", pattern, "Pattern to match");
-
-	// We parse the arguments
-	CLI11_PARSE(app, argc, argv);
+	
+	pattern = argv[1];
 
 	// Finally we do the actual grepping
 	grep(pattern, data);
